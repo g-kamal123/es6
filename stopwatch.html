@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <button id="restart">restart</button>
+    <button id="lapstime">lapstime</button>
+    <div id="root"></div>
+    <div id="lapse"></div>
+</body>
+<script>
+    var s=0;
+    var ms =0;
+    var m =0;
+    document.getElementById('start').addEventListener('click',()=>{
+    a=setInterval(milliseconds,0);
+    b=setInterval(seconds,1000);
+    c=setInterval(minutes,60000);
+    document.getElementById('start').disabled = true;
+    document.getElementById('stop').disabled = false;
+    document.getElementById('restart').disabled = true;
+    });
+    document.getElementById('stop').addEventListener('click',()=>{
+       clearInterval(a);
+       clearInterval(b);
+       clearInterval(c);
+    document.getElementById('root').innerHTML = "<h1>"+m+":"+s+":"+ms+"</h1>";
+    document.getElementById('stop').disabled = true;
+    document.getElementById('start').disabled = false;
+    document.getElementById('restart').disabled = false;
+    });
+    let minutes = ()=>{
+        m+=1;
+    }
+    let seconds = ()=>{
+        if(s<=60)
+        s+=1;
+        else s=0;
+    }
+    let milliseconds = ()=>{
+        if(ms<1000)
+        ms += 1;
+        else ms=0;
+    document.getElementById('root').innerHTML = "<h1>"+m+":"+s+":"+ms+"</h1>";
+    }
+
+    document.getElementById('restart').addEventListener('click',()=>{
+    s=0;
+    ms =0;
+    m =0;
+    document.getElementById('root').innerHTML = "<h1>"+m+":"+s+":"+ms+"</h1>";
+    a=setInterval(milliseconds,0);
+    b=setInterval(seconds,1000);
+    c=setInterval(minutes,60000);
+    document.getElementById('start').disabled = true;
+    document.getElementById('stop').disabled = false;
+    });
+
+    document.getElementById('lapstime').addEventListener('click',()=>{
+    document.getElementById('lapse').innerHTML += m+":"+s+":"+ms+"<br>";
+    })
+
+
+</script>
+</html>
